@@ -5,12 +5,11 @@ const path = require('path');
 const CsvReadableStream = require('csv-reader');
 const http = require('http').createServer(app);
 
+// preliminary actions
+let subjectNames = fs.readFileSync(path.join(__dirname, '/subjects.txt'), 'utf8').split("\n");
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-
-
-//let subjectNames = fs.readFileSync(path.join(__dirname, '/subjects.txt'), 'utf8').split("\n");
 
 app.get('/', (req, res) => {
     res.set('Cache-Control', 'public, max-age=25200');
