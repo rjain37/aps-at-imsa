@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= exam%> Statistics</title>
+    <%- include('../partials/head.ejs'); %>
+    <%- include('../partials/meta.ejs'); %>
+</head>
+
+<body>
+    <nav class="navbar">
+		<%- include('../partials/searchbar.ejs'); %>
+	</nav>
+    <br>
+    <div class = "text-white container border border-dark mx-auto">
+        <table style = "margin:0; width:100%">
+            <tbody>
+                <tr>
+                    <td>
+                        <h3><%= exam %></h3>
+                        <p>Data goes from 2017 until now.</p>
+                    </td>
+                    <td style = "float:right">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td style = "font-weight:bold">
+                                        Number
+                                    </td>
+                                    <td>
+                                        &nbsp; <%= count %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style = "font-weight:bold">
+                                        Average
+                                    </td>
+                                    <td>
+                                        &nbsp; <%= average %>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <canvas id="totalChart" style = "width:100%; height:400px"></canvas>
+        <script>
+            const scoreLabels = [1, 2, 3, 4, 5];
+            let data = {
+                labels: scoreLabels,
+                datasets: [{
+                    label: 'Number',
+                    data: [<%= scoreArray %>],
+                    backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    ],
+                    borderWidth: 1
+                }]
+                };
+            let config = {
+                type: 'bar',
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Students',
+                                color: 'white'
+                            },
+                            ticks:{
+								color: 'white'
+							},
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: "Scores",
+                                color: 'white'
+                            },
+                            ticks:{
+								color: 'white'
+							},
+                        }
+                    },
+                    plugins:{
+                        legend:{
+                            display:false
+                        },
+                    }
+                }
+            };
+            
+            const totalChart = new Chart('totalChart', config);
+        </script>
+        <br>
+    </div>
+</body><br>
+
+<footer class="footer text-center text-lg-start">
+	<%- include('../partials/footer.ejs'); %>
+</footer>
+
+</html>

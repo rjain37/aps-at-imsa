@@ -1,14 +1,14 @@
-Research
-Seminar
-Art and Design (formerly Studio Art): 2-D Design
-Art and Design (formerly Studio Art): 3-D Design
-Art and Design (formerly Studio Art): Drawing
+Art and Design: 2-D Design
+Art and Design: 3-D Design
+Art and Design: Drawing
 Art History
 Biology
 Calculus AB
 Calculus BC
+Calculus BC: AB Subscore
 Chemistry
 Chinese Language and Culture
+Comparative Government and Politics
 Computer Science A
 Computer Science Principles
 English Language and Composition
@@ -17,22 +17,25 @@ Environmental Science
 European History
 French Language and Culture
 German Language and Culture
-Government and Politics (Comparative)
-Government and Politics (US)
 Human Geography
 Italian Language and Culture
 Japanese Language and Culture
 Latin
 Macroeconomics
 Microeconomics
+Music Aural Subscore
+Music Non-Aural Subscore
 Music Theory
-Physics 1: Algebra-Based
-Physics 2: Algebra-Based
+Physics 1
+Physics 2
 Physics C: Electricity and Magnetism
 Physics C: Mechanics
 Psychology
 Spanish Language and Culture
 Spanish Literature and Culture
 Statistics
-US History
+United States Government and Politics
+United States History
 World History: Modern
+Research
+Seminar

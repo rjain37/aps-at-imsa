@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>About</title>
+    <%- include('../partials/head.ejs'); %>
+    <%- include('../partials/meta.ejs'); %>
+</head>
+
+<body>
+	<script>
+		console.log('Created by Rohan Jain. See his profile at https://www.linkedin.com/in/rjain37/.');
+	</script>
+    <nav class="navbar">
+		<%- include('../partials/searchbar.ejs'); %>
+	</nav>
+    <br>
+    <div id="main" class = "text-white">
+		<div class="container">
+			<h2>Initiative</h2>
+			<p>
+				This website was created for students and parents at the <a href = "https://imsa.edu">Illinois Mathematics and Science Academy</a> to have a visual representation of statistics regarding AP Exams. Data goes back as far as 2017 and is always updated with the most recent results.
+			</p>
+			<p>
+				Note that this is not an official website. If you come across an error, please report it.
+			</p>
+			<h2>Values</h2>
+			<ul>
+				<li><b>Consistency:</b> It is vital that statistics like these are complete. This is in an effort to prevent clientelism, inefficiency, and false perceptions.</li>
+				<li><b>Dissenimation:</b> Information like this should be offered to everyone. Many tests often have similar statistics attached to them such as average score, so APs should act the same way at multiple levels of scoping.</li>
+				<li><b>Transparency:</b> Data regarding individual performance needs to be complete, anonymous, and not crowd-sourced to avoid inconsistencies. Otherwise, a non-response bias is created.</li>
+			</ul>
+			<h2>Links</h2>
+			<ul>
+				<li><a href='mailto:rjain@imsa.edu'>Contact</a><br></li>
+				<li><a href='mailto:rjain@imsa.edu'>Report an Error</a><br></li>
+				<li><a href='/data'>Download Data</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+<footer class="footer text-center text-lg-start">
+	<%- include('../partials/footer.ejs'); %>
+</footer>
+
+</html>

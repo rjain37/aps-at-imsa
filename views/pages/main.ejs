@@ -2,35 +2,141 @@
 <html lang="en">
 
 <head>
+	<title>APs@IMSA</title>
     <%- include('../partials/head.ejs'); %>
     <%- include('../partials/meta.ejs'); %>
-    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar">
 		<%- include('../partials/searchbar.ejs'); %>
 	</nav>
-    <div id="main">
-		<div class="container" id="intro">
-			<h2>
+	<br>
+
+    <div id="main" class = "text-light">
+		<div class="container">
+			<h1>
 				Welcome to APs@IMSA
-			</h2>
+			</h1>
 			<p>
 				This website was created in an attempt for students to gain access to a tool that would help them better understand the mysterious aura surrounding AP exams, especially at a school that does not offer such courses. Search any subject you would like in the searchbar above to view various statistics regarding that specific AP subject. 
 			</p>
-
-			<div id="advantages" class="container">
-				<!-- <p><a class="call" href="/grades">Download Raw Data:</a> Raw Data is in CSV format</p>
-				<p><a class="call" href="/about">About Page:</a> How it started, where it's going, etc.</p>
-				<p><a class="call" href="/privacy">Privacy Policy:</a> The privacy policy includes important information</p> -->
-			</div>
+			<h2>
+				Mission Statement
+			</h2>
+			<p>
+				"To provide an unbiased and noiseless visualization of data regarding AP Exams."
+			</p>
 		</div>
+
+		<div class = "container" style = "margin-bottom: 20px">
+			<h2>Most Popular Exam</h2>
+		</div>
+		<div class = "container border border-dark mx-auto">
+			<table style = "margin-top:10px; width:100%">
+				<tbody>
+					<tr>
+						<td>
+							<h4><%= mostPopularName %></h4>
+							<p>This graph depicts statistics for the most popular AP test at IMSA.</p>
+						</td>
+						<td style = "float:right">
+							<table>
+								<tbody>
+									<tr>
+										<td style = "font-weight:bold">
+											Number
+										</td>
+										<td>
+											&nbsp; <%= mostPopularCount %>
+										</td>
+									</tr>
+									<tr>
+										<td style = "font-weight:bold">
+											Average
+										</td>
+										<td>
+											&nbsp; <%= mostPopularAverage %>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<canvas id="mostPopularAP" style = "width:100%; height:400px"></canvas>
+			<script>
+				const scoreLabels = [1, 2, 3, 4, 5];
+				let data = {
+					labels: scoreLabels,
+					datasets: [{
+						label: 'Number',
+						data: [<%= mostPopularExamScoreArray %>],
+						backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(255, 159, 64, 0.2)',
+						'rgba(255, 205, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						],
+						borderColor: [
+						'rgb(255, 99, 132)',
+						'rgb(255, 159, 64)',
+						'rgb(255, 205, 86)',
+						'rgb(75, 192, 192)',
+						'rgb(54, 162, 235)',
+						],
+						borderWidth: 1
+					}]
+					};
+				let config = {
+					type: 'bar',
+					data: data,
+					options: {
+						scales: {
+							y: {
+								beginAtZero: true,
+								title: {
+									display: true,
+									text: 'Number of Students',
+									color: 'white',
+								},
+								ticks:{
+									color: 'white'
+								},
+							},
+							x: {
+								title: {
+									display: true,
+									text: "Scores",
+									color: 'white'
+								},
+								ticks:{
+									color: 'white'
+								},
+							},
+						},
+						plugins:{
+							legend:{
+								display:false
+							},
+						}
+					}
+				};
+				
+				const mostPopularAP = new Chart('mostPopularAP', config);
+			</script>
+		</div><br>
+		<!--<canvas id="easiestAP" style = "width:100%; height:400px"></canvas>-->
+		<script>
+
+		</script>
 	</div>
 </body>
 
-<footer>
-
+<footer class="footer text-center text-lg-start">
+	<%- include('../partials/footer.ejs'); %>
 </footer>
 
 </html>
