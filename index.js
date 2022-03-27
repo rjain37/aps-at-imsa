@@ -7,10 +7,8 @@ const http = require('http').createServer(app);
 const Chart = require('chart.js');
 
 // preliminary actions
-const examNames = fs.readFileSync(path.join(__dirname, '/exams.txt'), 'utf8').split("\n");
-const formattedNames = examNames.map(c => [c.replace(/[\n\r]/g, ''), c.replace(/[\n\r]/g, '').split(' ').join('+')]);
-
-const scoreLabels = [1, 2, 3, 4, 5];
+const examNames = fs.readFileSync(path.join(__dirname, '/exams.txt'), 'utf8').split("\n").map(e => e.replace(/[\n\r]/g, ''));
+const formattedNames = examNames.map(e => [e.replace(/[\n\r]/g, ''), e.replace(/[\n\r]/g, '').split(' ').join('+')]);
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -21,10 +19,10 @@ app.use(express.static(__dirname + "/public"));
 app.get('/', async (req, res) => {
     res.set('Cache-Control', 'public, max-age=25200');
     
-    var mostPopularExam = await getMostPopularExam();
-    var mostPopularExamScoreArray = await getExamData(mostPopularExam);
-    var mostPopularCount = sampleSize(mostPopularExamScoreArray);
-    var mostPopularAverage = getAverageScore(mostPopularExamScoreArray);
+    let mostPopularExam = await getMostPopularExam();
+    let mostPopularExamScoreArray = await getExamData(mostPopularExam);
+    let mostPopularCount = sampleSize(mostPopularExamScoreArray);
+    let mostPopularAverage = getAverageScore(mostPopularExamScoreArray);
 
     res.render('pages/main.ejs', {
         exams: formattedNames,
@@ -45,12 +43,16 @@ app.get('/about', (req, res) => {
 
 app.get("/*", async (req, res) => {
 	res.set('Cache-Control', 'public, max-age=25200');
-    var exam = decodeURI(req.url.substring(1).split('+').join('%20'));
+    let exam = decodeURI(req.url.substring(1).split('+').join('%20'));
+    let scoreArray = await getExamData(exam);
+    let count = sampleSize(scoreArray);
+    let average = getAverageScore(scoreArray);
 
-    var scoreArray = await getExamData(exam);
-    var count = sampleSize(scoreArray);
-    var average = getAverageScore(scoreArray);
-    if(count != 0){
+    if(!examNames.includes(exam)){
+        res.render('pages/404.ejs',{
+            exams: formattedNames
+        });
+    }else if(count != 0){
         res.render('pages/class.ejs', {
             exam: exam,
             exams: formattedNames,
@@ -60,6 +62,7 @@ app.get("/*", async (req, res) => {
         });
     }else if (count == 0){
         res.render('pages/zero.ejs',{
+            exam: exam,
             exams: formattedNames
         });
     }
@@ -82,6 +85,8 @@ const server = http.listen(8080, () => {
     console.log(`App listening at http://localhost:${port}`);
 });
 
+//returns a 2-d array of length n where n is the number of years of data available
+//to-do: calculate number of available years within function
 async function getExamData(examName){
     var years = [];
     var scoresData = [];
@@ -109,6 +114,7 @@ async function getExamData(examName){
     });
 }
 
+//is given an array of arrays with length 5, returns singular array with respective indices summed
 function summedArray(arr){
     let returnedArray = [0, 0, 0, 0, 0];
 
@@ -123,34 +129,20 @@ function summedArray(arr){
     return returnedArray;
 }
 
+//sums all values in a 1d array
 function sampleSize(arr){
     let total = 0;
     arr.forEach(x => total += x);
     return total;
 }
 
+//weighted average of array based on indices
 function getAverageScore(arr){
     return Math.round(100 * (1 * arr[0] + 2 * arr[1] + 3 * arr[2] + 4 * arr[3] + 5 * arr[4]) / sampleSize(arr))/100;
 }
 
-async function getMostPopularExam(){
-    let highest = -1;
-    let examName = '';
-    return new Promise(async (res) => {
-        formattedNames.forEach(async exam => {
-            var scores = await getExamData(exam[0]);
-            if(sampleSize(scores) > highest){
-                highest = sampleSize(scores);
-                console.log(exam[0]);
-                examName = exam[0];
-            }
-        });
-        res(examName);
-    });
-}
-
 async function getMostPopularExam () {
-    var examData = await Promise.all(formattedNames.map(async exam => [exam[0], await getExamData(exam[0])]));
+    var examData = await Promise.all(formattedNames.map(async e => [e[0], await getExamData(e[0])]));
 
     let highest = -1;
     let examName = '';

@@ -1,12 +1,16 @@
 body {
     background-color: #131c2b !important;
+    font-family: 'Montserrat', sans-serif;
 }
 
-:root {
-    --primary-c: #193767;
-    --secondary-c: #515151;
-    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+select{
+    height: 40px;
+    border-radius:8px;
+    border:1px solid #AAAAAA;
+}
+
+option{
+    font-size: 20px;
 }
 
 .searchbar {
@@ -27,7 +31,7 @@ body {
 
 .navbar {
     padding-top: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 2px;
     background-color: #0d1420;
 }
 
