@@ -80,7 +80,7 @@ app.get("/error", (req, res) => {
     res.status(404).render("pages/404.ejs");
 })
 
-const server = http.listen(8080, () => {
+const server = http.listen(process.env.PORT || 8080, () => {
     const port = server.address().port;
     console.log(`App listening at http://localhost:${port}`);
 });
