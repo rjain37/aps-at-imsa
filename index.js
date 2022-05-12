@@ -41,6 +41,20 @@ app.get('/about', (req, res) => {
     });
 });
 
+app.get('/data', (req, res) => {
+	res.set('Cache-Control', 'public, max-age=25200');
+
+	res.status(200).sendFile(path.join(__dirname, 'scores.csv'))
+})
+
+app.get("/compare", (req, res) => {
+    res.set('Cache-Control', 'public, max-age=25200');
+
+    res.status(404).render("pages/compare.ejs", {
+        exams: formattedNames
+    });
+})
+
 app.get("/*", async (req, res) => {
 	res.set('Cache-Control', 'public, max-age=25200');
     let exam = decodeURI(req.url.substring(1).split('+').join('%20'));
@@ -67,18 +81,6 @@ app.get("/*", async (req, res) => {
         });
     }
 });
-
-app.get('/data', (req, res) => {
-	res.set('Cache-Control', 'public, max-age=25200');
-
-	res.status(200).sendFile(path.join(__dirname, '/scores.csv'))
-})
-
-app.get("/error", (req, res) => {
-    res.set('Cache-Control', 'public, max-age=25200');
-
-    res.status(404).render("pages/404.ejs");
-})
 
 const server = http.listen(process.env.PORT || 8080, () => {
     const port = server.address().port;

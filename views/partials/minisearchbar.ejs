@@ -1,0 +1,14 @@
+<div class='searchbar'>
+	<table style = "width:100%">
+		<tr>
+			<td style = "width: 75%">
+				<select style = "width: 100%;" name = "searchbar" id = "search">
+					<option value='' description = "placeholder" selected disabled>Select an exam...</option>
+					<% exams.forEach(function(exam){ %>
+						<option value = '/<%= exam[1] %>' description = "placeholder"> <%=exam[0] %></option>
+					<% }); %>
+				</select>
+			</td>
+		</tr>
+	</table>
+</div>
