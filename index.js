@@ -143,7 +143,7 @@ function getAverageScore(arr){
     return Math.round(100 * (1 * arr[0] + 2 * arr[1] + 3 * arr[2] + 4 * arr[3] + 5 * arr[4]) / sampleSize(arr))/100;
 }
 
-async function getMostPopularExam () {
+async function getMostPopularExam() {
     var examData = await Promise.all(formattedNames.map(async e => [e[0], await getExamData(e[0])]));
 
     let highest = -1;
