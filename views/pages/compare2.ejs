@@ -16,7 +16,7 @@
             <thead>
                 <tr>
                     <th scope="col">
-                        Name
+                        
                     </th>
                     <th scope = "col">
                         <div class='searchbar'>
@@ -71,16 +71,30 @@
             <tbody>
                 <tr>
                     <td>
+                        Name
+                    </td>
+                    <td>
+                        <%= exam1data[0] %>
+                    </td>
+                    <td>
+                        <%= exam2data[0] %>
+                    </td>
+                    <td>
+                        <%= exam3data[0] %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         Average Score
                     </td>
                     <td>
-                        
+                        <%= exam1data[1] %>
                     </td>
                     <td>
-                        
+                        <%= exam2data[1] %>
                     </td>
                     <td>
-                        
+                        <%= exam3data[1] %>
                     </td>
                 </tr>
                 <tr>
@@ -88,13 +102,13 @@
                         Pass Rate
                     </td>
                     <td>
-                        
+                        <%= exam1data[2] %>
                     </td>
                     <td>
-                        
+                        <%= exam2data[2] %>
                     </td>
                     <td>
-                        
+                        <%= exam3data[2] %>
                     </td>
                 </tr>
                 <tr>
@@ -102,13 +116,13 @@
                         Number of 5s
                     </td>
                     <td>
-
+                        <%= exam1data[3] %>
                     </td>
                     <td>
-                        
+                        <%= exam2data[3] %>
                     </td>
                     <td>
-                        
+                        <%= exam3data[3] %>
                     </td>
                 </tr>
                 <tr>
@@ -116,17 +130,20 @@
                         Number of Test-takers
                     </td>
                     <td>
-
+                        <%= exam1data[4] %>
                     </td>
                     <td>
-                        
+                        <%= exam2data[4] %>
                     </td>
                     <td>
-                        
+                        <%= exam3data[4] %>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <center>
+            <a href = "/compare"><button type="button" class="btn btn-dark">Restart</button></a>
+        </center>
     </div>
 </body>
 
