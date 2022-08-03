@@ -23,7 +23,7 @@
                             <table style = "width:100%">
                                 <tr>
                                     <td style = "width: 75%">
-                                        <select style = "width: 100%;" name = "searchbar" id = "minisearch1" onchange = "location.pathname = encodeURI('compare' + this.value + '++');">
+                                        <select style = "width: 100%;" name = "searchbar" id = "minisearch1" onchange = "location.pathname = encodeURI('compare' + this.value);">
                                             <option value='' description = "placeholder" selected disabled>Select an exam...</option>
                                             <% exams.forEach(function(exam){ %>
                                                 <option value = '/<%= exam[1] %>' description = "placeholder"> <%=exam[0] %></option>
@@ -39,7 +39,7 @@
                             <table style = "width:100%">
                                 <tr>
                                     <td style = "width: 75%">
-                                        <select style = "width: 100%;" name = "searchbar" id = "minisearch2" onchange = "location.pathname = encodeURI(location.pathname + this.value.substring(1) + '++');">
+                                        <select style = "width: 100%;" name = "searchbar" id = "minisearch2" onchange = "location.pathname = encodeURI(location.pathname + '++' + this.value.substring(1));">
                                             <option value='' description = "placeholder" selected disabled>Select an exam...</option>
                                             <% exams.forEach(function(exam){ %>
                                                 <option value = '/<%= exam[1] %>' description = "placeholder"> <%=exam[0] %></option>
@@ -55,7 +55,7 @@
                             <table style = "width:100%">
                                 <tr>
                                     <td style = "width: 75%">
-                                        <select style = "width: 100%;" name = "searchbar" id = "minisearch3" onchange = "location.pathname = encodeURI(location.pathname + this.value.substring(1));">
+                                        <select style = "width: 100%;" name = "searchbar" id = "minisearch3" onchange = "location.pathname = encodeURI(location.pathname + '++' + this.value.substring(1));">
                                             <option value='' description = "placeholder" selected disabled>Select an exam...</option>
                                             <% exams.forEach(function(exam){ %>
                                                 <option value = '/<%= exam[1] %>' description = "placeholder"> <%=exam[0] %></option>
