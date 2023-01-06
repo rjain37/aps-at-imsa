@@ -7,11 +7,14 @@ const http = require('http').createServer(app);
 const Chart = require('chart.js');
 
 // preliminary actions
-const examNames = fs.readFileSync(path.join(__dirname, '/exams.txt'), 'utf8').split("\n").map(e => e.replace(/[\n\r]/g, ''));
+const examNames = fs.readFileSync(path.join(__dirname, '/public/exams.txt'), 'utf8').split("\n").map(e => e.replace(/[\n\r]/g, ''));
 const formattedNames = examNames.map(e => [e.replace(/[\n\r]/g, ''), e.replace(/[\n\r]/g, '').split(' ').join('+')]);
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
+
+// remap views
+app.set('views', path.join(__dirname, '/public/views'));
 
 // accessing images
 app.use(express.static(__dirname + "/public"));
@@ -44,7 +47,7 @@ app.get('/about', (req, res) => {
 app.get('/data', (req, res) => {
 	res.set('Cache-Control', 'public, max-age=25200');
 
-	res.status(200).sendFile(path.join(__dirname, 'scores.csv'))
+	res.status(200).sendFile(path.join(__dirname, 'public/scores.csv'))
 })
 
 app.get("/compare", (req, res) => {
@@ -141,7 +144,7 @@ async function getExamData(examName){
     let i = -1;
 
     return new Promise((res) => {
-        fs.createReadStream('scores.csv').pipe(csv())
+        fs.createReadStream('public/scores.csv').pipe(csv())
         .on('data', (row) => {
             if(!years.includes(parseInt(row.Year))){
                 years.push(parseInt(row.Year));
